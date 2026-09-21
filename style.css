@@ -4,11 +4,78 @@
    Font Attribution: Atkinson Hyperlegible Font by the Braille Institute. Source: https://brailleinstitute.org/freefont
    API Attribution: Quotable API by Luke Peavey. Source: https://github.com/lukePeavey/quotable
    Inspiration/Reference: Work by Taylor Tidwell. YouTube Video: https://youtu.be/8g-DF9hKMgg and p5.js Sketch: https://editor.p5js.org/ttidwell24/sketches/q6on3p4oy
-   Inspiration/Reference: Work by Jeff Thompson. YouTube Video: https://www.youtube.com/watch?v=exrH7tvt3f4 
+   Inspiration/Reference: Work by Jeff Thompson. YouTube Video: https://www.youtube.com/watch?v=exrH7tvt3f4
    Canvas Mirroring Technique: Kate Hartman & Nicholas Puckett| OCAD University */
 
-   body {
+body {
     margin: 0; /* Removes the default margin from the body element */
     padding: 0; /* Removes the default padding from the body element */
     overflow: hidden; /* Hides any content that overflows the body's box */
+    background: #000;
+}
+
+/* Pill-shaped panel holding the slider and theme buttons */
+.controls {
+    --accent: #ee9b00; /* Updated from JS to match the active theme */
+    position: fixed;
+    bottom: 16px; /* Raised above the quote box from sketch.js */
+    left: 16px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+#size-slider {
+    width: 150px;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.themes {
+    display: flex;
+    gap: 10px;
+}
+
+/* Circular theme buttons, filled with a wedge of each theme colour */
+.theme-button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.12);
+}
+
+.theme-button[aria-pressed="true"] {
+    border-color: #fff;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6), 0 0 0 4px #fff;
+}
+
+.theme-button:focus-visible,
+#size-slider:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
